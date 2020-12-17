@@ -32,7 +32,7 @@ export class DurakRoom extends Room {
   }
 
   onAuth() {
-    if (this.state.gameStarted) throw new Error("Game already started.");
+    if (this.state.gameStarted) throw new Error("Das Spiel läuft bereits. Tut mir Leid.");
     else return true;
   }
 
@@ -48,6 +48,8 @@ export class DurakRoom extends Room {
       }
       await this.allowReconnection(client, 10);
     } catch (e) {
+      const player = this.state.players.get(client.id)
+      this.state.errorMessages.push(player.name + " hat das Spiel verlassen.")
       this.state.players.delete(client.id);
     }
   }

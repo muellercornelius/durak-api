@@ -14,8 +14,9 @@ export const won = (state: DurakState) => {
     state.defender = [...state.players.values()][1].name;
   } else {
     const durak = [...state.players.values()][0].name;
-    console.log("Der Durak ist: " + durak);
+    state.successMessages.push("Der Durak ist: " + durak);
     resetState(state)
+    state.successMessages.push("Spiel beendet. Es können neue Leute Joinen.");
   }
 
   state.tableCards = JSON.stringify([[]]);

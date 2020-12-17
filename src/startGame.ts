@@ -17,4 +17,5 @@ export const startGame = (state: DurakState) => {
   state.defender = [...state.players.values()][0].name;
   state.attacker = [...state.players.values()][1].name;
   state.stackCount = state.stack.length;
+  state.successMessages.push("Auf gehts, die Runde läuft.")
 };

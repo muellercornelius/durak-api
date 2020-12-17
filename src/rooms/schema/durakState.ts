@@ -55,4 +55,10 @@ export class DurakState extends Schema {
 
   @type("string")
   tableCards: string = JSON.stringify([[]]); 
+
+  @type(["string"])
+  errorMessages = new ArraySchema<string>();
+
+  @type(["string"])
+  successMessages = new ArraySchema<string>();
 }
