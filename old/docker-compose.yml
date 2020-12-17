@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  traefik:
+    external:
+      name: traefik_default
+
+services:
+  durak:
+    container_name: cornelius_durak_api_1
+    image: durak
+    expose:
+      - "8000"
+    restart: always
+    networks:
+      - traefik
+
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik_default
+      - traefik.http.routers.durak-api.rule=Host(`durak.muellercornelius.de`)
+      - traefik.http.routers.durak-api.entrypoints=web-secure
+      - traefik.http.routers.durak-api.tls.certresolver=tls
+      - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto = https
