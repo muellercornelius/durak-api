@@ -7,8 +7,9 @@ import { DurakState } from "./rooms/schema/durakState";
 
 export const startGame = (state: DurakState) => {
   state.gameStarted = true;
+  state.playerBackup = state.players;
   state.stack = shuffle(fillStack());
-  const handout = cardHandout(state.stack, state.players, 6);
+  const handout = cardHandout(state.stack, state.players, state.cardsPerPlayer);
   state.stack = handout[0];
   state.players = handout[1];
   state.trump = state.stack.pop();

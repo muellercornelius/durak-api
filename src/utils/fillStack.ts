@@ -8,7 +8,7 @@ export const fillStack = () => {
     "3",
     "4",
     "5",
-    "6",
+/*     "6",
     "7",
     "8",
     "9",
@@ -16,7 +16,7 @@ export const fillStack = () => {
     "Bube",
     "Dame",
     "König",
-    "Ass",
+    "Ass", */
   ];
   cardColors.forEach((color) => {
     cardNumbers.forEach((number) => {

@@ -10,7 +10,8 @@ export class DurakRoom extends Room {
   onCreate(options: any) {
     this.setState(new DurakState());
 
-    this.onMessage("startGame", () => {
+    this.onMessage("startGame", (options, cardCount) => {
+      this.state.cardsPerPlayer = +cardCount
       startGame(this.state);
     });
 

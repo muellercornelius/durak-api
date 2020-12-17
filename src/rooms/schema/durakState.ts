@@ -47,6 +47,9 @@ export class DurakState extends Schema {
   @type({map: Player})
   players = new MapSchema<Player>();
 
+  @type({map: Player})
+  playerBackup = new MapSchema<Player>();
+
   @type([Card])
   stack = new ArraySchema<Card>();
 

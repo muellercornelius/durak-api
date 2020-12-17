@@ -15,8 +15,11 @@ export const cardHandout = (stack: any, players: any, cardCount: Number) => {
 
   for (let i = 1; i <= cardCount; i++) {
     newPlayers.forEach((player: Player) => {
-      let card = newStack.pop()
-      card.owner = player.id
+      let card = newStack.pop();
+      if (card) card.owner = player.id;
+      else {
+        throw new Error("not enough cards for all players available");
+      }
       player.cards.push(card);
     });
   }
