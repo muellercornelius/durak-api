@@ -5,6 +5,7 @@ import { playCard } from "../playCard";
 import { takeCardBack } from "../takeCardBack";
 import { won } from "../won";
 import { defended } from "../defended";
+import { resetState } from "../resetState";
 
 export class DurakRoom extends Room {
   onCreate(options: any) {
@@ -28,6 +29,12 @@ export class DurakRoom extends Room {
     });
     this.onMessage("defended", () => {
       defended(this.state);
+    });
+    this.onMessage("resetGame", () => {
+      resetState(this.state)
+    });
+    this.onMessage("killServer", () => {
+      process.exit( );
     });
   }
 
