@@ -5,20 +5,23 @@ const { draw } = require("./utils/draw");
 
 export const won = (state: DurakState) => {
   draw(state);
+  try {
+    if (state.players.size >= 2) {
+      let players = [...state.players.entries()];
+      players.push(players.shift());
+      state.players = new MapSchema<Player>(new Map(players));
+      state.defender = [...state.players.values()][1].name;
+      state.attacker = [...state.players.values()][0].name;
+    } else {
+      const durak = [...state.players.values()][0].name;
+      state.successMessages.push("Der Durak ist: " + durak);
+      resetState(state);
+      state.successMessages.push("Spiel beendet. Es können neue Leute Joinen.");
+    }
 
-  if (state.players.size >= 2) {
-    let players = [...state.players.entries()];
-    players.push(players.shift())
-    state.players = new MapSchema<Player>(new Map(players));
-    state.defender = [...state.players.values()][1].name;
-    state.attacker = [...state.players.values()][0].name;
-  } else {
-    const durak = [...state.players.values()][0].name;
-    state.successMessages.push("Der Durak ist: " + durak);
-    resetState(state)
-    state.successMessages.push("Spiel beendet. Es können neue Leute Joinen.");
+    state.tableCards = JSON.stringify([[]]);
+    state.stackCount = state.stack.length;
+  } catch (err) {
+    state.errorMessages.push("Ups da ging was schief: " + err);
   }
-
-  state.tableCards = JSON.stringify([[]]);
-  state.stackCount = state.stack.length;
 };
