@@ -28,6 +28,7 @@ export const defended = (state: DurakState) => {
       state.attacker = [...state.players.values()][0].name;
     } else {
       const durak = [...state.players.values()][0].name;
+      state.lastDurak = durak
       state.successMessages.push("Der Durak ist: " + durak);
       resetState(state);
       state.successMessages.push("Spiel beendet. Es können neue Leute Joinen.");

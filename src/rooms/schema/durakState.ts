@@ -36,6 +36,9 @@ export class DurakState extends Schema {
   stackCount: Number = 52;
 
   @type("string")
+  lastDurak: string = undefined;
+
+  @type("string")
   attacker: string;
 
   @type("string")

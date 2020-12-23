@@ -3,7 +3,8 @@ const { shuffle } = require("./utils/shuffle");
 const { shufflePlayers } = require("./utils/shufflePlayers");
 const { cardHandout } = require("./utils/cardHandout");
 
-import { DurakState } from "./rooms/schema/durakState";
+import { MapSchema } from "@colyseus/schema";
+import { DurakState, Player } from "./rooms/schema/durakState";
 
 export const startGame = (state: DurakState) => {
   try {
@@ -20,8 +21,19 @@ export const startGame = (state: DurakState) => {
     state.trump = state.stack.pop();
     state.players = shufflePlayers(state.players);
     try {
-      state.defender = [...state.players.values()][1].name;
-      state.attacker = [...state.players.values()][0].name;
+      if (state.lastDurak) {
+        for (let player of state.players) {
+          let players = [...state.players.entries()];
+          players.push(players.shift());
+          state.players = new MapSchema<Player>(new Map(players));
+          state.defender = [...state.players.values()][1].name;
+          state.attacker = [...state.players.values()][0].name;
+          if (state.defender == state.lastDurak) break;
+        }
+      } else {
+        state.defender = [...state.players.values()][1].name;
+        state.attacker = [...state.players.values()][0].name;
+      }
     } catch (err) {
       state.errorMessages.push("Es sind nicht genug Spieler angemeldet");
     }
