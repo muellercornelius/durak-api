@@ -17,13 +17,13 @@ export const defended = (state: DurakState) => {
       player.cards.push(newCard);
     });
 
-    draw(state);
-
+    
     if (state.players.size >= 2) {
       let players = [...state.players.entries()];
       players.push(players.shift());
       players.push(players.shift());
       state.players = new MapSchema<Player>(new Map(players));
+      draw(state);
       state.defender = [...state.players.values()][1].name;
       state.attacker = [...state.players.values()][0].name;
     } else {
