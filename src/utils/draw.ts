@@ -16,11 +16,11 @@ export const draw = (state: DurakState) => {
           gamePlayer.cards.length < state.cardsPerPlayer &&
           state.stack.length == 0
         ) {
+          state.successMessages.push("Den Trumpf bekam: " + gamePlayer.name)
           console.log("Den Trumpf bekam: " + gamePlayer.name);
           let card = state.trump;
           card.owner = gamePlayer.id;
           gamePlayer.cards.push(card);
-          state.trump = undefined;
         }
       }
       if (gamePlayer.cards.length == 0) state.players.delete(gamePlayer.id);
