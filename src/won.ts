@@ -8,8 +8,8 @@ export const won = (state: DurakState) => {
     if (state.players.size >= 2) {
       let players = [...state.players.entries()];
       players.push(players.shift());
-      draw(state);
       state.players = new MapSchema<Player>(new Map(players));
+      draw(state);
       state.defender = [...state.players.values()][1].name;
       state.attacker = [...state.players.values()][0].name;
     } else {
