@@ -21,6 +21,7 @@ export const draw = (state: DurakState) => {
           let card = state.trump;
           card.owner = gamePlayer.id;
           gamePlayer.cards.push(card);
+          state.trump = undefined;
         }
       }
       if (gamePlayer.cards.length == 0) state.players.delete(gamePlayer.id);
